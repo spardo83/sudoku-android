@@ -1,7 +1,9 @@
 package ar.edu.unlam.sudoku
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import ar.edu.unlam.sudoku.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.nuevoJuego.setOnClickListener {
-            SudokuActivity()
+            val intent = Intent(this, SudokuActivity::class.java)
+            startActivity(intent)
         }
     }
 }
