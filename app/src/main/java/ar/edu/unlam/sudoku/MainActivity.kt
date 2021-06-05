@@ -2,10 +2,17 @@ package ar.edu.unlam.sudoku
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ar.edu.unlam.sudoku.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.nuevoJuego.setOnClickListener {
+            SudokuActivity()
+        }
     }
 }
