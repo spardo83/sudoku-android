@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding.nuevoJuego.setOnClickListener {
             val intent = Intent(this, SudokuActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
