@@ -1,4 +1,4 @@
-package ar.edu.unlam.sudoku.board
+package ar.edu.unlam.sudoku.board.config
 
 class Constants {
     companion object {

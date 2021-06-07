@@ -1,28 +1,29 @@
-package ar.edu.unlam.sudoku.board
+package ar.edu.unlam.sudoku.board.impl
 
 import androidx.annotation.StringRes
 import ar.edu.unlam.sudoku.R
-import ar.edu.unlam.sudoku.board.Constants.Companion.GRID_SIZE
-import ar.edu.unlam.sudoku.board.Constants.Companion.GRID_SIZE_SQUARE_ROOT
-import ar.edu.unlam.sudoku.board.Constants.Companion.MAX_DIGIT_INDEX
-import ar.edu.unlam.sudoku.board.Constants.Companion.MAX_DIGIT_VALUE
-import ar.edu.unlam.sudoku.board.Constants.Companion.MIN_DIGIT_INDEX
-import ar.edu.unlam.sudoku.board.Constants.Companion.MIN_DIGIT_VALUE
+import ar.edu.unlam.sudoku.board.BoardService
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.GRID_SIZE
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.GRID_SIZE_SQUARE_ROOT
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.MAX_DIGIT_INDEX
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.MAX_DIGIT_VALUE
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.MIN_DIGIT_INDEX
+import ar.edu.unlam.sudoku.board.config.Constants.Companion.MIN_DIGIT_VALUE
 import ar.edu.unlam.sudoku.exceptions.FieldCannotBeSetException
 import ar.edu.unlam.sudoku.exceptions.NumberOutOfRangeException
 
-class Service(val dificulty: Dificulty) {
+class BoardServiceImpl : BoardService {
 
     private val grid = Array(GRID_SIZE) { IntArray(GRID_SIZE) { 0 } }
     private val availablePositions = mutableListOf<EditableField>()
     private var solvedBoard = Array(GRID_SIZE) { IntArray(GRID_SIZE) { 0 } }
 
-    fun newGame(): Array<IntArray> {
-        fillGrid()
+    override fun newGame(difficulty: Difficulty): Array<IntArray> {
+        fillGrid(difficulty)
         return grid
     }
 
-    fun setValue(row: Int, column: Int, value: Int): Boolean {
+    override fun setValue(row: Int, column: Int, value: Int): Boolean {
         if (value !in MIN_DIGIT_VALUE..MAX_DIGIT_VALUE) throw NumberOutOfRangeException(value)
 
         if (notEditableField(row, column)) throw FieldCannotBeSetException(row, column, "SET")
@@ -32,20 +33,19 @@ class Service(val dificulty: Dificulty) {
         return isCorrectNumber(row, column)
     }
 
-    fun deleteValue(row: Int, column: Int) {
+    override fun deleteValue(row: Int, column: Int) {
         if (notEditableField(row, column)) throw FieldCannotBeSetException(row, column, "DELETE")
         grid[row][column] = 0
     }
 
-    fun isBoardSolved() = solvedBoard.contentEquals(grid)
+    override fun isBoardSolved() = solvedBoard.contentEquals(grid)
 
 
-
-    private fun fillGrid() {
+    private fun fillGrid(difficulty: Difficulty) {
         fillDiagonalQuadrant()
         fillRemaining(0, GRID_SIZE_SQUARE_ROOT)
         saveSolvedGrid()
-        removeDigits()
+        removeDigits(difficulty)
     }
 
     private fun saveSolvedGrid() {
@@ -139,8 +139,8 @@ class Service(val dificulty: Dificulty) {
         return true
     }
 
-    private fun removeDigits() {
-        var digitsToRemove = GRID_SIZE * GRID_SIZE - dificulty.providedDigits
+    private fun removeDigits(difficulty: Difficulty) {
+        var digitsToRemove = GRID_SIZE * GRID_SIZE - difficulty.providedDigits
 
         while (digitsToRemove > 0) {
             val randomRow = generateRandomInt(MIN_DIGIT_INDEX, MAX_DIGIT_INDEX)
@@ -184,7 +184,7 @@ class Service(val dificulty: Dificulty) {
     }
 
     data class EditableField(val rowIndex: Int, val columnIndex: Int)
-    enum class Dificulty(@StringRes val displayText: Int, val providedDigits: Int) {
+    enum class Difficulty(@StringRes val displayText: Int, val providedDigits: Int) {
         HARD(R.string.hard, 10),
         MEDIUM(R.string.medium, 15),
         EASY(R.string.easy, 20),
