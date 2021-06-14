@@ -9,4 +9,5 @@
     <string name="Button7">7</string>
     <string name="Button8">8</string>
     <string name="Button9">9</string>
+    <string name="textoIngresarNumero">Numero a ingresar</string>
 </resources>
