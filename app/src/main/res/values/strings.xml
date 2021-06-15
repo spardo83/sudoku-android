@@ -10,4 +10,11 @@
     <string name="Button8">8</string>
     <string name="Button9">9</string>
     <string name="textoIngresarNumero">Numero a ingresar</string>
+    <string name="hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="easy">Easy</string>
+    <string name="super_easy">Super easy</string>
+    <string name="main_title">SUDOKU</string>
+    <string name="new_game">Nuevo juego</string>
+    <string name="input_number">Numero a ingresar</string>
 </resources>

@@ -1,11 +1,13 @@
-package ar.edu.unlam.sudoku.logic
+package ar.edu.unlam.sudoku.board.impl
+
+import ar.edu.unlam.sudoku.board.config.Constants
 
 internal object Solver {
 
     lateinit var grid: Array<IntArray>
 
     fun solvable(grid: Array<IntArray>) : Boolean {
-        this.grid = grid.copy()
+        Solver.grid = grid.copy()
 
         return solve()
     }
