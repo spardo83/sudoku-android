@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
 import ar.edu.unlam.sudoku.databinding.ActivityMainBinding
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
@@ -17,19 +18,21 @@ class MainActivity : AppCompatActivity() {
 
         checkSavedGames()
         checkScores()
+        setListener()
+    }
 
+    private fun setListener() {
         binding.buttonNewGame.setOnClickListener { newGame() }
+
         binding.seekBarLevel.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                var level = ""
-                when(progress) {
-                    0 -> level = "Super facil"
-                    1 -> level = "Facil"
-                    2 -> level = "Mediano"
-                    3 -> level = "Dificil"
+                binding.textViewLevel.text = when(progress) {
+                    0 -> getString(R.string.super_easy)
+                    1 -> getString(R.string.easy)
+                    2 -> getString(R.string.medium)
+                    3 -> getString(R.string.hard)
+                    else -> throw Exception("Nivel elegido erroneo")
                 }
-
-                binding.textViewLevel.text = level
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
