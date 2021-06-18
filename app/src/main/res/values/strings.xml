@@ -7,4 +7,7 @@
     <string name="main_title">SUDOKU</string>
     <string name="new_game">Nuevo juego</string>
     <string name="input_number">Numero a ingresar</string>
+    <string name="saved_games">Partidas guardadas</string>
+    <string name="scores">Puntajes</string>
+    <string name="difficult_level">Nivel de dificultad:</string>
 </resources>
