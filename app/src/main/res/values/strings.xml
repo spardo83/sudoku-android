@@ -17,4 +17,7 @@
     <string name="Button8">8</string>
     <string name="Button3">3</string>
     <string name="Button7">7</string>
+    <string name="saved_games">Partidas guardadas</string>
+    <string name="scores">Puntajes</string>
+    <string name="difficult_level">Nivel de dificultad:</string>
 </resources>
