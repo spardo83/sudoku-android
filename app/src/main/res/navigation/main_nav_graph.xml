@@ -3,17 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph.xml"
-    app:startDestination="@id/menuFragment2">
+    app:startDestination="@id/menuFragment">
     <fragment
-        android:id="@+id/menuFragment2"
+        android:id="@+id/menuFragment"
         android:name="ar.edu.unlam.sudoku.MenuFragment"
-        android:label="MenuFragment" >
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu">
         <action
-            android:id="@+id/action_menuFragment2_to_gameFragment"
+            android:id="@+id/action_menuFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="ar.edu.unlam.sudoku.GameFragment"
-        android:label="GameFragment" />
+        android:label="GameFragment"
+        tools:layout="@layout/fragment_game"/>
 </navigation>

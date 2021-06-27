@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import ar.edu.unlam.sudoku.databinding.FragmentMenuBinding
 import java.lang.Exception
 
@@ -60,8 +62,7 @@ class MenuFragment : Fragment() {
     }
 
     private fun newGame() {
-        val intent = Intent(this, SudokuActivity::class.java)
-        startActivity(intent)
-        finish()
+        val nav = requireActivity().findNavController(R.id.main_nav_host)
+        nav.navigate(R.id.action_menuFragment_to_gameFragment)
     }
 }
